@@ -1,6 +1,17 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const mongoose = require('mongoose');
+
+// Connecting mongo database
+mongoose.connect('mongodb://localhost:27017/yelp-camp');
+
+// Database connection test
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', () => {
+    console.log('database open');
+});
 
 // Sets our view location to the home.ejs file
 app.set('view engine', 'ejs');
